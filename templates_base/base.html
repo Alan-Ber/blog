@@ -32,7 +32,9 @@
     <!-- Navigation (header)-->
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
+        
         <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
+        <a class="navbar-brand" href="{% url 'crear_post'%}">Crear entrada</a>
         <a class="navbar-brand" href="{% url 'entradas' %}">Entradas</a>
         <a class="navbar-brand" href="{% url 'acerca_de'%}">Acerca de</a>
         {% if user.is_authenticated %}

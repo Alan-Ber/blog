@@ -2,12 +2,14 @@
 <title>Blog - Inicio</title>
 {%endblock titulo%} {%block contenido %}
 <h1>&copy;TuBlog.</h1>
-<br />
+<br>
+<a href="{% url 'crear_post'%}">Crear post</a>
+<br><br>
 <h3>Listado de entradas:</h3>
 
 <ul>
   {% for entradas in entrada %}
-  <li>{{ entradas.titulo }}</li>
+  <li>{{ entradas.titulo }}, {{entradas.autor}}</li>
   {% endfor %}
 </ul>
 {%endblock contenido%}

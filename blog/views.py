@@ -5,6 +5,7 @@ from django.urls import reverse
 from control_blog.models import Entrada, Usuario, Etiqueta
 from control_blog.forms import EntradaFormulario
 
+### INICIO ####
 def saludar_con_html(request):
     contexto = {}
     http_response = render(
@@ -14,7 +15,7 @@ def saludar_con_html(request):
     )
     return http_response
 
-
+### LISTADO DE DE ENTRADAS ###
 def listado_entradas(request):
     contexto = {
         "entrada": Entrada.objects.all(),
@@ -26,7 +27,7 @@ def listado_entradas(request):
     )
     return http_response
 
-
+### INFO BLOG ####
 def acerca_de(request):
     contexto = {}
     http_response = render(
@@ -37,21 +38,7 @@ def acerca_de(request):
     return http_response
 
 
-
-def crear_post1(request):
-   if request.method == "POST":
-       data = request.POST
-       nueva_entrada = Entrada(titulo=data['titulo'], subtitulo=data['subtitulo'], cuerpo=data['cuerpo'])
-       nueva_entrada.save()
-       url_exitosa = reverse('entradas')
-       return redirect(url_exitosa)
-   else:  # GET
-       return render(
-           request=request,
-           template_name='formulario_post.html',
-       )
-
-
+### CREAR ENTRADAS ###
 def crear_post(request):
     if request.method == "POST":
         formulario = EntradaFormulario(request.POST)
@@ -59,10 +46,11 @@ def crear_post(request):
         if formulario.is_valid():
             data = formulario.cleaned_data
             titulo = data["titulo"]
-            subtitulo = data["subtitulo"]
+            autor = data["autor"]
             cuerpo = data["cuerpo"]
+            
 
-            nueva_entrada = Entrada(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo)
+            nueva_entrada = Entrada(titulo=titulo, autor=autor, cuerpo=cuerpo)
             nueva_entrada.save()
 
             # Redirecciono al usuario a la lista de entradas
@@ -76,4 +64,28 @@ def crear_post(request):
         template_name='formulario_post.html',
         context={'formulario': formulario}
     )
+
+
+### BUSCAR ENTRADAS ###
+def buscar_entradas(request):
+    if request.method == "POST":
+        data = request.POST
+        busqueda = data["busqueda"]
+        entradas = Entrada.objects.filter(titulo__icontains=busqueda)
+        contexto = {
+            "entradas": entradas,
+        }
+        return render(
+            request=request,
+            template_name='entradas.html',
+            context=contexto,
+        )
+    else:
+        # Manejar el caso en el que no se envió una solicitud POST (opcional)
+        return render(
+            request=request,
+            template_name='formulario_busqueda_entradas.html',
+        )
+    
+
 

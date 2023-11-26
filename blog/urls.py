@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from blog.views import saludar_con_html, listado_entradas, acerca_de, crear_post, buscar_entradas
+from blog.views import saludar_con_html, listado_entradas, acerca_de, crear_post, buscar_entradas, eliminar_entrada, editar_entrada, ver_entrada
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -28,5 +28,8 @@ urlpatterns = [
     path("info/", acerca_de, name="acerca_de"),
     path("crear-post/", crear_post, name="crear_post"),
     path("buscar-entradas/", buscar_entradas, name="buscar_entradas"),
+    path("eliminar-entrada/<str:titulo>/",eliminar_entrada,name="eliminar_entrada"),
+    path("editar-entrada/<str:titulo>/",editar_entrada,name="editar_entrada"),
+    path("ver-entrada/<str:titulo>/",ver_entrada,name="ver_entrada"),
 
 ]

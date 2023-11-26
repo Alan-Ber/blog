@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from control_blog.models import Entrada, Usuario, Etiqueta
 from control_blog.forms import EntradaFormulario
+
 
 ### INICIO ####
 def saludar_con_html(request):
@@ -37,7 +39,6 @@ def acerca_de(request):
     )
     return http_response
 
-
 ### CREAR ENTRADAS ###
 def crear_post(request):
     if request.method == "POST":
@@ -65,7 +66,6 @@ def crear_post(request):
         context={'formulario': formulario}
     )
 
-
 ### BUSCAR ENTRADAS ###
 def buscar_entradas(request):
     if request.method == "POST":
@@ -87,5 +87,43 @@ def buscar_entradas(request):
             template_name='formulario_busqueda_entradas.html',
         )
     
+### ELIMINAR ENTRADA ###
+def eliminar_entrada(request, titulo):
+   entrada = Entrada.objects.get(titulo=titulo)
+   if request.method == "POST":
+       entrada.delete()
+       url_exitosa = reverse('entradas')
+       return redirect(url_exitosa)
 
+### EDITAR ENTRADA ###
+def editar_entrada(request, titulo):
+   
+   entrada = Entrada.objects.get(titulo=titulo)
+   if request.method == "POST":
+       formulario = EntradaFormulario(request.POST)
 
+       if formulario.is_valid():
+           data = formulario.cleaned_data
+           entrada.titulo = data['titulo']
+           entrada.autor = data['autor']
+           entrada.cuerpo = data['cuerpo']
+           entrada.save()
+           url_exitosa = reverse('entradas')
+           return redirect(url_exitosa)
+   else:  # GET
+       inicial = {
+           'titulo': entrada.titulo,
+           'comision': entrada.autor,
+           'comision': entrada.cuerpo,
+       }
+       formulario = EntradaFormulario(initial=inicial)
+   return render(
+       request=request,
+       template_name='formulario_post.html',
+       context={'formulario': formulario},)
+
+### VER ENTRADAS ###
+def ver_entrada(request, titulo):
+    entrada = Entrada.objects.get(titulo=titulo)
+    contexto = {'entrada': entrada}
+    return render(request, 'entradas_cuerpos.html', contexto)

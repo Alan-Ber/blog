@@ -2,14 +2,36 @@
 <title>Blog - Inicio</title>
 {%endblock titulo%} {%block contenido %}
 <h1>&copy;TuBlog.</h1>
-<br>
+<br />
 <a href="{% url 'crear_post'%}">Crear post</a>
-<br><br>
+<br /><br />
 <h3>Listado de entradas:</h3>
 
-<ul>
-  {% for entradas in entrada %}
-  <li>{{ entradas.titulo }}, {{entradas.autor}}</li>
-  {% endfor %}
-</ul>
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Título</th>
+      <th>Autor</th>
+      <th></th>
+    </tr>
+    {% for entradas in entrada %}
+    <tr>
+      <td>{{ entradas.titulo }}</td>
+      <td>{{entradas.autor}}</td>
+      <td>
+        <a href="{% url 'editar_entrada' entradas.titulo%}">Editar</a>
+      </td>
+      <td>
+      <a href="{% url 'ver_entrada' titulo=entradas.titulo%}">Ver detalle</a>
+    </td>
+      <td>
+        <form action="{% url 'eliminar_entrada' entradas.titulo%}"method="post">
+          {% csrf_token %}
+          <input type="submit" class="btn btn-link" value="Eliminar" />
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {%endblock contenido%}

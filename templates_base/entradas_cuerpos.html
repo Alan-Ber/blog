@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block titulo %}
+<title>Blog - Ver Cuerpo de Entrada</title>
+{% endblock titulo %}
+{% block contenido %}
+<h1>&copy;TuBlog.</h1>
+<br />
+<h3>Ver Cuerpo de Entrada:</h3>
+
+<p>{{ entrada.cuerpo }}</p>
+
+
+<a href="{% url 'entradas'  %}">Volver a Entradas</a>
+
+{% endblock contenido %}

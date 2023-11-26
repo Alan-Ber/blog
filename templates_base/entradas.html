@@ -1,0 +1,13 @@
+{% extends "base.html"%} {%block titulo%}
+<title>Blog - Inicio</title>
+{%endblock titulo%} {%block contenido %}
+<h1>&copy;TuBlog.</h1>
+<br />
+<h3>Listado de entradas:</h3>
+
+<ul>
+  {% for entradas in entrada %}
+  <li>{{ entradas.titulo }}</li>
+  {% endfor %}
+</ul>
+{%endblock contenido%}

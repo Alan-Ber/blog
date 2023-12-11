@@ -33,5 +33,5 @@ contraseña:1234abcd
 
 # Usuarios normales
 
-pedror, antonio
-cod3r47780
+juanac
+arbusto123

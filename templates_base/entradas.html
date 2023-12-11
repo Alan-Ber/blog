@@ -19,16 +19,23 @@
       <td>{{ entradas.titulo }}</td>
       <td>{{entradas.autor}}</td>
       <td>
+        {% if user == entradas.creador %}
         <a href="{% url 'editar_entrada' entradas.titulo%}">Editar</a>
+        {% endif %}
       </td>
       <td>
-      <a href="{% url 'ver_entrada' titulo=entradas.titulo%}">Ver detalle</a>
-    </td>
+        <a href="{% url 'ver_entrada' titulo=entradas.titulo%}">Ver detalle</a>
+      </td>
       <td>
-        <form action="{% url 'eliminar_entrada' entradas.titulo%}"method="post">
+        {% if user == entradas.creador %}
+        <form
+          action="{% url 'eliminar_entrada' entradas.titulo%}"
+          method="post"
+        >
           {% csrf_token %}
           <input type="submit" class="btn btn-link" value="Eliminar" />
         </form>
+        {% endif%}
       </td>
     </tr>
     {% endfor %}

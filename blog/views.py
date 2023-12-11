@@ -60,7 +60,8 @@ def crear_post(request):
             autor = data["autor"]
             cuerpo = data["cuerpo"]
 
-            nueva_entrada = Entrada(titulo=titulo, autor=autor, cuerpo=cuerpo)
+            nueva_entrada = Entrada(
+                titulo=titulo, autor=autor, creador=request.user, cuerpo=cuerpo)
             nueva_entrada.save()
 
             # Redirecciono al usuario a la lista de entradas

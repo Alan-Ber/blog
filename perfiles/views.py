@@ -56,3 +56,4 @@ def login_view(request):
 
 class CustomLogoutView(LogoutView):
     template_name = 'perfiles/logout.html'
+

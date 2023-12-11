@@ -28,8 +28,10 @@ urlpatterns = [
     path("info/", acerca_de, name="acerca_de"),
     path("crear-post/", crear_post, name="crear_post"),
     path("buscar-entradas/", buscar_entradas, name="buscar_entradas"),
-    path("eliminar-entrada/<str:titulo>/",eliminar_entrada,name="eliminar_entrada"),
-    path("editar-entrada/<str:titulo>/",editar_entrada,name="editar_entrada"),
-    path("ver-entrada/<str:titulo>/",ver_entrada,name="ver_entrada"),
+    path("eliminar-entrada/<str:titulo>/",
+         eliminar_entrada, name="eliminar_entrada"),
+    path("editar-entrada/<str:titulo>/", editar_entrada, name="editar_entrada"),
+    path("ver-entrada/<str:titulo>/", ver_entrada, name="ver_entrada"),
+    path("perfiles/", include("perfiles.urls")),
 
 ]

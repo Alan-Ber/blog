@@ -32,7 +32,6 @@
     <!-- Navigation (header)-->
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
-        
         <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
         <a class="navbar-brand" href="{% url 'crear_post'%}">Crear entrada</a>
         <a class="navbar-brand" href="{% url 'entradas' %}">Entradas</a>
@@ -70,7 +69,7 @@
         </div>
         {% else %}
         <a class="btn btn-primary" href="#!">Inicio sesión</a>
-        <a class="btn btn-success" href="#!">Registro</a>
+        <a class="btn btn-success" href="{% url 'registro'%}">Registro</a>
         {% endif %}
       </div>
     </nav>

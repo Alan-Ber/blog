@@ -2,8 +2,9 @@
 <title>Blog - Inicio</title>
 {%endblock titulo%} {%block contenido %} {% if user.is_authenticated %}
 <h1>Bienvenido/a {{user.first_name}} a &copy;TuBlog.</h1>
-{%else%} {%endif%}
+{%else%}
 <h1>Bienvenido/a visitante a &copy;TuBlog.</h1>
+{%endif%}
 <br />
 <h3>¡Déjate llevar por tu imáginación!</h3>
 <br />

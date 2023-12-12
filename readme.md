@@ -35,3 +35,8 @@ contraseña:1234abcd
 
 juanac
 arbusto123
+
+# Instrucciones para correr servidor
+
+1- Posicionarse en \Proyecto Final\blog>
+2- correr el comando python manage.py runserver
